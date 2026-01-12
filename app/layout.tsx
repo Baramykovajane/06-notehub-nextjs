@@ -6,17 +6,15 @@ import "@/styles/globals.css";
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="antialiased">
-        <TanstackProvider>
-          <Header />
+      <body>
+  <TanstackProvider>
+    <Header />
+    {children}
+    <Footer />
+    <div id="modal-root" />
+  </TanstackProvider>
+</body>
 
-          <div className="container mx-auto px-4 py-6">
-            {children}
-          </div>
-
-          <Footer />
-        </TanstackProvider>
-      </body>
     </html>
   );
 }
