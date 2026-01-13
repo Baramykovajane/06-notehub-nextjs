@@ -5,12 +5,20 @@ import { useParams } from "next/navigation";
 import { fetchNoteById } from "@/lib/api";
 
 export default function NoteDetailsClient() {
-  const { id } = useParams();
+  const params = useParams();
+  const id = params.id as string;
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["note", id],
-    queryFn: () => fetchNoteById(id as string),
-    enabled: !!id, 
+    queryFn: () => fetchNoteById(id),
+
+    enabled: !!id,
+
+    
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    staleTime: 1000 * 60 * 5, 
   });
 
   if (!id) return <p>Note ID not found.</p>;
